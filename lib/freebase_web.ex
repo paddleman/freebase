@@ -17,7 +17,7 @@ defmodule FreebaseWeb do
   those modules here.
   """
 
-  def static_paths, do: ~w(assets fonts images favicon.ico robots.txt)
+  def static_paths, do: ~w(assets fonts images uploads favicon.ico robots.txt)
 
   def router do
     quote do
@@ -55,7 +55,7 @@ defmodule FreebaseWeb do
       use Phoenix.LiveView,
         layout: {FreebaseWeb.Layouts, :app}
 
-      import FreebaseWeb.UtilHelpers
+      import FreebaseWeb.UtilityHelpers
 
       unquote(html_helpers())
     end
@@ -64,6 +64,7 @@ defmodule FreebaseWeb do
   def live_component do
     quote do
       use Phoenix.LiveComponent
+      import FreebaseWeb.UtilityHelpers
 
       unquote(html_helpers())
     end

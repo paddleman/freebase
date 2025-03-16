@@ -11,7 +11,82 @@
     <script defer phx-track-static type="text/javascript" src={~p"/assets/app.js"}>
     </script>
   </head>
-  <body class="bg-white">
+  <body class="bg-lidar-dark">
+    <header class="px-4 mb-2">
+      <div class="flex items-center justify-between border-b border-zinc-100 py-3 text-sm">
+        <div class="flex items-center gap-4">
+          <a href="/">
+            <img src={~p"/images/mcelhanney-logo.png"} class="h-6" />
+          </a>
+
+          <p class="bg-brand/5 text-brand rounded-full px-2 font-medium leading-6">
+            v{Application.spec(:phoenix, :vsn)}
+          </p>
+        </div>
+
+        <div class="flex items-center gap-4 font-semibold leading-6 text-zinc-900">
+          <ul class="relative z-10 flex items-center gap-4 px-4 sm:px-6 lg:px-8 justify-end">
+            <%= if @current_user do %>
+              <li>
+                <li>
+                  <button class="group relative flex items-center h-8 text-sm pl-8 pr-3 cursor-pointer w-full">
+                    <FreebaseWeb.UserComponent.user_card user={@current_user} />
+
+                    <div class="hidden group-focus:block cursor-default absolute top-10 right-2 bg-zinc-300/50 py-2 rounded-lg">
+                      <div class="w-full text-left">
+                        <div class="hover:bg-mc-dark-teal">
+                          <div
+                            class="cursor-pointer whitespace-nowrap text-zinc-700 hover:text-zinc-100 px-6 py-1 block"
+                            phx-click={JS.navigate(~p"/users/settings")}
+                          >
+                            Manage Password and Email
+                          </div>
+                        </div>
+
+                        <div class="hover:bg-mc-dark-teal">
+                          <div
+                            phx-click={JS.navigate(~p"/users/profile")}
+                            class="cursor-pointer whitespace-nowrap text-zinc-700 hover:text-zinc-100 px-6 py-1"
+                          >
+                            User Profile
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </button>
+                </li>
+              </li>
+              <li>
+                <.link
+                  href={~p"/users/log_out"}
+                  method="delete"
+                  class="text-[0.8125rem] leading-6 font-semibold text-zinc-300 hover:text-zinc-300/50"
+                >
+                  Log out
+                </.link>
+              </li>
+            <% else %>
+              <li>
+                <.link
+                  href={~p"/users/register"}
+                  class=" leading-6 font-semibold text-zinc-300 hover:text-zinc-300/50"
+                >
+                  Register
+                </.link>
+              </li>
+              <li>
+                <.link
+                  href={~p"/users/log_in"}
+                  class="leading-6 font-semibold text-zinc-300 hover:text-zinc-300/50"
+                >
+                  Log in
+                </.link>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    </header>
     {@inner_content}
   </body>
 </html>
