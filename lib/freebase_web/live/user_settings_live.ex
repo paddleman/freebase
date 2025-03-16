@@ -10,7 +10,7 @@ defmodule FreebaseWeb.UserSettingsLive do
       <:subtitle>Manage your account email address and password settings</:subtitle>
     </.header>
 
-    <div class="space-y-12 divide-y">
+    <div class="space-y-8 divide-y w-1/4 mx-auto">
       <div>
         <.simple_form
           for={@email_form}
