@@ -111,7 +111,7 @@ defmodule Freebase.Accounts.User do
   defp maybe_validate_unique_username(changeset, opts) do
     if Keyword.get(opts, :validate_username, true) do
       changeset
-      |> unsafe_validate_unique(:username, Crossings.Repo)
+      |> unsafe_validate_unique(:username, Freebase.Repo)
       |> unique_constraint(:username)
     else
       changeset
